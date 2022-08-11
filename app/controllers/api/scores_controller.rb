@@ -1,7 +1,7 @@
 module Api
   # Controller that handles CRUD operations for scores
   class ScoresController < ApplicationController
-    before_action :logged_in!
+    #before_action :logged_in!
     before_action :validate_score_user_id, only: :destroy
 
     def user_feed
@@ -27,6 +27,15 @@ module Api
           errors: score.errors.messages
         }, status: :bad_request
       end
+    end
+
+
+    def user_scores
+      scores = Score.where( user_id: params[:id])
+      response = {
+        scores: scores,
+      }
+      render json: response.to_json
     end
 
     def destroy
