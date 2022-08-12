@@ -1,7 +1,16 @@
+# Handles the api requests
 module Api
   # Controller that handles authorization and user data fetching
   class UsersController < ApplicationController
     include Devise::Controllers::Helpers
+
+    def user_name
+      user = User.find(params[:id])
+      response = {
+        name: user.name,
+      }
+      render json: response.to_json
+    end
 
     def login
       user = User.find_by('lower(email) = ?', params[:email])
@@ -27,13 +36,4 @@ module Api
       }.to_json
     end
   end
-
-  def user_name
-    user = User.find(params[:id])
-    response = {
-      name: user.name,
-    }
-    render json: response.to_json
-  end
-
 end

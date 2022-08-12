@@ -104,4 +104,16 @@ describe Api::ScoresController, type: :request do
       expect(Score.count).to eq score_count
     end
   end
+
+  describe 'GET golfer scores' do
+    it 'should return the token if valid username/password' do
+      get '/api/scores/user_scores', params: { id: @user1.id }
+
+      expect(response).to have_http_status(:ok)
+      response_hash = JSON.parse(response.body)
+      scores = response_hash['scores']
+
+      expect(scores.size).to eq 0
+    end
+  end
 end
