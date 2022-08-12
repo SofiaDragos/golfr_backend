@@ -28,7 +28,7 @@ describe Api::UsersController, type: :controller do
       @user1 = create(:user, name: 'User1', email: 'user@email.com', password: 'userpass')
     end
 
-    it 'should return the token if valid username/password' do
+    it 'should return error if the get request does not return the corect name' do
       get :user_name, params: { id: @user1.id }
 
       expect(response).to have_http_status(:ok)

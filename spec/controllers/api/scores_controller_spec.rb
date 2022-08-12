@@ -106,7 +106,7 @@ describe Api::ScoresController, type: :request do
   end
 
   describe 'GET golfer scores' do
-    it 'should return the token if valid username/password' do
+    it 'should error if the get request for scores does not return the correct scores' do
       get '/api/scores/user_scores', params: { id: @user1.id }
 
       expect(response).to have_http_status(:ok)
