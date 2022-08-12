@@ -29,6 +29,14 @@ module Api
       end
     end
 
+    def user_scores
+      scores = Score.where(user_id: params[:id])
+      response = {
+        scores: scores,
+      }
+      render json: response.to_json
+    end
+
     def destroy
       @score.destroy!
 
